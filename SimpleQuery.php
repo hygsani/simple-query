@@ -45,12 +45,20 @@ class SimpleQuery
 
 	// get one record
 	// ex. SELECT * FROM table WHERE id = ?
-	public function getOneById($table, array $bindValue)
+	public function getOneById($table, $bindValue)
 	{
 		try {
-			$ps = $this->conn->prepare("SELECT * FROM $table WHERE " . key($bindValue) . " = ?");
+			if (is_int($bindValue)) {
+				$pk = 'id';
+				$value = $bindValue;
+			} elseif (is_array($bindValue)) {
+				$pk = key($bindValue);
+				$value = $bindValue[key($bindValue)];
+			}
 
-			$ps->bindValue(1, $bindValue[key($bindValue)], PDO::PARAM_INT);
+			$ps = $this->conn->prepare("SELECT * FROM $table WHERE $pk = ?");
+
+			$ps->bindValue(1, $value, PDO::PARAM_INT);
 			$ps->execute();
 
 			return $ps->fetch(PDO::FETCH_ASSOC);

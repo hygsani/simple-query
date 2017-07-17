@@ -11,6 +11,7 @@ $rs = $sq->getAll('m_user');
 
 // get one record by id
 $rs = $sq->getOneById('m_user', array('user_id' => 1));
+$rs = $sq->getOneById('m_user', 1);
 
 // get first record
 $rs = $sq->getFirst('m_user', 'user_id');

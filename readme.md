@@ -18,6 +18,11 @@ $rs = $sq->getOneById('m_user', array('user_id' => 1));
 ```
 >SELECT * FROM m_user WHERE user_id = 1
 
+```
+$rs = $sq->getOneById('m_user', 4);
+```
+>SELECT * FROM m_user WHERE id = 4
+
 **get first record**
 ```
 $rs = $sq->getFirst('m_user', 'user_id');
