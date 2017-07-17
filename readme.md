@@ -1,3 +1,3 @@
-# basic orm
+# SimpleQuery
 
 example of use:
